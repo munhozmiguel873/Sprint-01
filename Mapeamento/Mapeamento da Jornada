@@ -1,0 +1,16 @@
+//Mapeamento da Jornada: Desenhe o caminho que o voluntário percorre.
+- Mapa da Jornada: Seu João na Horta Comunitária
+- Persona: Seu João (Aposentado, 65 anos, visão levemente cansada, usa um celular básico).
+- Cenário: Um dia de sol intenso (10h da manhã) na horta do bairro.
+
+//Jornada do Seu João (Resumo)
+- Em Casa: Abre o app para ver a tarefa. (Sentimento: 🙂 Ok)
+- Na Horta: Tenta ler a tela sob sol forte e reflexo. (Sentimento: 😟 Dificuldade)
+- Ação: Rega as plantas e lida com terra/água. (Sentimento: 😊 Foco)
+- Registro: Tenta clicar no botão de "Concluído" com dedo úmido e visão ofuscada. (Sentimento: 🧐 Insegurança)
+- Saída: Recebe a confirmação e encerra. (Sentimento: ✅ Alívio)
+
+//O que fazer no Projeto (Insights)
+- UI (Visual): Use Preto e Branco puro (alto contraste). Botões grandes (mínimo 48px).
+- UX (Experiência): Poucos cliques. Informação direta, sem "frufrus".
+- HTML (Código): Use títulos claros (<h1>, <h2>) e botões reais (<button>) para que leitores de tela e o sistema entendam a ação rápido.
