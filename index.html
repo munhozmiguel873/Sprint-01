@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orta Comunitária - Gestão de Tarefas</title>
+</head>
+<body>
+
+    <main id="login-screen">
+        <header>
+            <img src="logo-orta.png" alt="Logo Orta Comunitária: Três pessoas estilizadas cultivando uma planta">
+        </header>
+        
+        <section>
+            <form action="#" method="POST">
+                <fieldset>
+                    <legend>Acesse sua conta</legend>
+                    
+                    <label for="email">E-MAIL:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="senha">SENHA:</label>
+                    <input type="password" id="senha" name="senha" required>
+
+                    <div>
+                        <input type="checkbox" id="conectar" name="conectar" checked>
+                        <label for="conectar">CONTINUAR CONECTADO</label>
+                    </div>
+
+                    <button type="submit">LOGIN</button>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <hr> <main id="dashboard-screen">
+        <header>
+            <nav>
+                <img src="perfil-joao.png" alt="Foto de perfil do usuário">
+                <h1>OLÁ, SEU JOÃO!</h1>
+                <p>O que vamos fazer hoje?</p>
+                <img src="logo-orta-small.png" alt="Logo Orta Comunitária">
+            </nav>
+        </header>
+
+        <section aria-labelledby="lista-tarefas">
+            <h2 id="lista-tarefas" class="sr-only">Lista de Tarefas</h2>
+            
+            <article class="card urgente">
+                <h3>CANTEIRO DE ALFACE (Urgente)</h3>
+                <ul>
+                    <li><strong>Localização:</strong> Setor A - Norte</li>
+                    <li><strong>Status:</strong> 🔴 PENDENTE</li>
+                </ul>
+                <button type="button">CLIQUE PARA VER DETALHES</button>
+            </article>
+
+            <article class="card">
+                <h3>CANTEIRO DE TOMATES (Tarefa Comum)</h3>
+                <ul>
+                    <li><strong>Localização:</strong> Setor B - Próximo ao Portão</li>
+                    <li><strong>Status:</strong> 🔴 PENDENTE</li>
+                </ul>
+                <button type="button">CLIQUE PARA VER DETALHES</button>
+            </article>
+
+            <article class="card concluida">
+                <h3>HORTELÃ E ERVAS (Já finalizada)</h3>
+                <ul>
+                    <li><strong>Localização:</strong> Setor C - Central</li>
+                    <li><strong>Status:</strong> ✅ CONCLUÍDO</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+
+    <hr>
+
+    <main id="detalhes-tarefa-screen">
+        <header>
+            <button type="button">VOLTAR</button>
+            <p>OLÁ, SEU JOÃO! - O que fazer hoje?</p>
+        </header>
+
+        <article>
+            <h2>REGAR CANTEIRO DE ALFACE</h2>
+            <p><strong>Setor A - Norte (Próximo ao Portão)</strong></p>
+            
+            <section class="instrucoes">
+                <h3>Instruções:</h3>
+                <ul>
+                    <li>Utilizar 2 baldes de água diretamente na raiz das plantas.</li>
+                    <li><strong>Aviso:</strong> Evitar molhar as folhas no sol forte.</li>
+                </ul>
+            </section>
+
+            <div class="acoes">
+                <button type="button">CONCLUIR TAREFA</button>
+                <button type="button" class="btn-perigo">REPORTAR PROBLEMA</button>
+            </div>
+        </article>
+    </main>
+
+    <hr>
+
+    <main id="sucesso-screen">
+        <header>
+            <p>CONFIRMAÇÃO (SUCESSO)</p>
+        </header>
+
+        <section role="alert">
+            <img src="icone-sucesso.png" alt="Ícone de check verde">
+            <h2>TAREFA CONCLUÍDA!</h2>
+            <blockquote>
+                Muito bem, Seu João! A horta agradece o seu cuidado.
+            </blockquote>
+            <button type="button">VOLTAR AO PAINEL DE TAREFAS</button>
+        </section>
+    </main>
+
+</body>
+</html>
