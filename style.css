@@ -1,13 +1,12 @@
-/* ESTILO ECO-MODERN - ALTO CONTRASTE E ACESSIBILIDADE */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif; /* Recomendo importar esta fonte ou usar Arial */
+    font-family: 'Montserrat', sans-serif;
 }
 
 :root {
-    --bg-horta: #FDFBF7; /* Creme: menos reflexo no sol */
+    --bg-horta: #FDFBF7; 
     --verde-folha: #1B5E20;
     --terra: #4E342E;
     --texto: #212121;
@@ -20,7 +19,6 @@ body {
     line-height: 1.6;
 }
 
-/* 1. TELA DE LOGIN (MAIS MODERNA) */
 #login-screen {
     display: flex;
     flex-direction: column;
@@ -85,7 +83,6 @@ button:active {
     transform: translateY(4px);
 }
 
-/* 2. DASHBOARD (FLUIDO E LIMPO) */
 .dash-header {
     background: white;
     padding: 20px;
@@ -108,7 +105,6 @@ button:active {
 
 h1 { font-size: 1.4rem; color: var(--verde-folha); }
 
-/* 3. CARDS DE AÇÃO (ESTILO BOTÃO FLUTUANTE) */
 .card-acao {
     display: block;
     background: white;
@@ -123,7 +119,6 @@ h1 { font-size: 1.4rem; color: var(--verde-folha); }
 
 .card-acao h3 { font-size: 1.3rem; }
 
-/* 4. LISTA DE PLANTIOS (ESTILO TIMELINE) */
 .item-plantio {
     background: white;
     border-radius: 12px;
