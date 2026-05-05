@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Novo Plantio - Orta</title>
+    <style>
+        :root {
+            --cor-fundo: #FFFFFF;
+            --cor-texto: #000000;
+            --cor-primaria: #004d00;
+            --cor-borda: #000000;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            border: 3px solid var(--cor-borda);
+            padding: 20px;
+        }
+        .btn-voltar {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background-color: #555;
+            padding: 10px 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid var(--cor-borda);
+            margin-bottom: 20px;
+        }
+        .btn-voltar:hover {
+            background-color: #333;
+        }
+        h2 {
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 3px solid black;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        input,
+        select {
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 2px solid var(--cor-borda);
+            font-size: 1.1rem;
+        }
+
+        button {
+            width: 100%;
+            height: 60px;
+            background-color: var(--cor-primaria);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-bottom: 5px solid #002600;
+        }
+
+        .item-plantio {
+            background: #f0f0f0;
+            padding: 15px;
+            border: 2px solid var(--cor-borda);
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <a href="index.html?logado=true" class="btn-voltar">← Voltar </a>
+            <h2>Novo Plantio</h2>
+        </header>
+
+        <form id="formPlantio">
+            <div class="form-group">
+                <label for="cultura">Tipo de Cultura:</label>
+                <select id="cultura" required>
+                    <option value="">Selecione...</option>
+                    <option value="Alface">Alface</option>
+                    <option value="Tomate">Tomate</option>
+                    <option value="Cenoura">Cenoura</option>
+                    <option value="Couve">Couve</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="area">Área do Canteiro (m²):</label>
+                <input type="number" id="area" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="data_plantio">Data de Plantio:</label>
+                <input type="date" id="data_plantio" required>
+            </div>
+
+            <button type="submit">Cadastrar Plantio</button>
+        </form>
+
+        <div id="listaPlantios" class="resultado">
+            <h3>Plantios Cadastrados:</h3>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('formPlantio');
+        const lista = document.getElementById('listaPlantios');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const cultura = document.getElementById('cultura').value;
+            const area = document.getElementById('area').value;
+            const data = document.getElementById('data_plantio').value;
+            const dataBR = data.split('-').reverse().join('/');
+
+            const novoPlantio = {
+                cultura: cultura.toUpperCase(),
+                area: area,
+                data: dataBR
+            };
+
+            const plantiosExistentes = JSON.parse(localStorage.getItem('meusPlantios')) || [];
+            plantiosExistentes.push(novoPlantio);
+            localStorage.setItem('meusPlantios', JSON.stringify(plantiosExistentes));
+
+            const div = document.createElement('div');
+            div.className = 'item-plantio';
+            div.innerHTML = `<strong>CULTURA:</strong> ${novoPlantio.cultura} <br> <strong>ÁREA:</strong> ${area} m² <br> <strong>DATA:</strong> ${dataBR}`;
+            lista.querySelector('h3').insertAdjacentElement('afterend', div);
+
+            alert("Plantio salvo! Clique em VOLTAR para ver no seu Dashboard.");
+            form.reset();
+        });
+    </script>
+
+</body>
+
+</html>
