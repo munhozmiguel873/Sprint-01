@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Novo Plantio - Orta</title>
+    <title>Cadastro de Novo Plantio - Horta</title>
     <style>
         :root {
             --cor-fundo: #FFFFFF;
@@ -12,18 +12,21 @@
             --cor-primaria: #004d00;
             --cor-borda: #000000;
         }
+
         body {
             font-family: Arial, sans-serif;
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
             padding: 20px;
         }
+
         .container {
             max-width: 500px;
             margin: 0 auto;
             border: 3px solid var(--cor-borda);
             padding: 20px;
         }
+
         .btn-voltar {
             display: inline-block;
             text-decoration: none;
@@ -35,23 +38,28 @@
             border: 2px solid var(--cor-borda);
             margin-bottom: 20px;
         }
+
         .btn-voltar:hover {
             background-color: #333;
         }
+
         h2 {
             text-transform: uppercase;
             margin-bottom: 20px;
             border-bottom: 3px solid black;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
             text-transform: uppercase;
         }
+
         input,
         select {
             width: 100%;
@@ -127,34 +135,71 @@
         const form = document.getElementById('formPlantio');
         const lista = document.getElementById('listaPlantios');
 
+        const CICLOS_CULTURA = {
+            "Alface": 45,
+            "Tomate": 90,
+            "Cenoura": 100,
+            "Couve": 70
+        };
+
+        function formatarDataBR(objetoData) {
+            const dia = String(objetoData.getDate()).padStart(2, '0');
+            const mes = String(objetoData.getMonth() + 1).padStart(2, '0');
+            const ano = objetoData.getFullYear();
+            return `${dia}/${mes}/${ano}`;
+        }
+
+        function renderizarItem(item) {
+            const div = document.createElement('div');
+            div.className = 'item-plantio';
+            div.innerHTML = `
+                <strong>CULTURA:</strong> ${item.cultura} <br>
+                <strong>ÁREA:</strong> ${item.area} m² <br>
+                <strong>DATA DE PLANTIO:</strong> ${item.data} <br>
+                <strong style="color: #004d00;">📅 PREVISÃO DE COLHEITA:</strong> ${item.colheita}
+            `;
+            lista.appendChild(div);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const plantiosExistentes = JSON.parse(localStorage.getItem('meusPlantios')) || [];
+            plantiosExistentes.forEach(item => renderizarItem(item));
+        });
+
         form.addEventListener('submit', function (event) {
             event.preventDefault();
 
             const cultura = document.getElementById('cultura').value;
             const area = document.getElementById('area').value;
-            const data = document.getElementById('data_plantio').value;
-            const dataBR = data.split('-').reverse().join('/');
+            const dataInput = document.getElementById('data_plantio').value;
+
+            const partesData = dataInput.split('-');
+            const dataPlantio = new Date(partesData[0], partesData[1] - 1, partesData[2]);
+            const dataColheita = new Date(dataPlantio);
+
+            const diasAteColheita = CICLOS_CULTURA[cultura] || 0;
+            dataColheita.setDate(dataPlantio.getDate() + diasAteColheita);
+
+            const dataPlantioBR = formatarDataBR(dataPlantio);
+            const dataColheitaBR = formatarDataBR(dataColheita);
 
             const novoPlantio = {
                 cultura: cultura.toUpperCase(),
                 area: area,
-                data: dataBR
+                data: dataPlantioBR,
+                colheita: dataColheitaBR
             };
 
             const plantiosExistentes = JSON.parse(localStorage.getItem('meusPlantios')) || [];
             plantiosExistentes.push(novoPlantio);
             localStorage.setItem('meusPlantios', JSON.stringify(plantiosExistentes));
 
-            const div = document.createElement('div');
-            div.className = 'item-plantio';
-            div.innerHTML = `<strong>CULTURA:</strong> ${novoPlantio.cultura} <br> <strong>ÁREA:</strong> ${area} m² <br> <strong>DATA:</strong> ${dataBR}`;
-            lista.querySelector('h3').insertAdjacentElement('afterend', div);
+            renderizarItem(novoPlantio);
 
             alert("Plantio salvo! Clique em VOLTAR para ver no seu Dashboard.");
             form.reset();
         });
     </script>
-
 </body>
 
 </html>
